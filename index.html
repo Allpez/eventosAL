@@ -9,29 +9,52 @@
 </head>
 
 <body>
+    <div class="layout">
+        <h1 class="titulo">Taller de Eventos</h1>
 
-    <h1 class="titulo">Taller de Eventos</h1>
+        <div class="ej">
+            <h2 class="titulo2">Ejercicio #1</h2>
+            <h4 class="titulo4">Introduce los datos solicitados para calcular tu <span class="tema">Indice de masa corporal (IMC).</span></h4>
+            <form id="form" class="form">
+                <label class="estatura">
+                    <span class="negrita">Estatura (cm)</span>
+                    <p class="parrafo">en centimetros:</p>
+                    <input type="number" name="estatura" required>
+                </label>
+                <label class="peso">
+                    <span class="negrita">Peso (kg)</span>
+                    <p class="parrafo">en kilogramos:</p>
+                    <input type="number" name="peso" required>
+                </label>
+                <button type="submit" class="boton">Calcular</button>
+            </form>
+            <label class="resultado">
+                Resultado
+                <input type="text" id="resultado" readonly>
+            </label>
+        </div>
 
+        <div class="ej div_2 conversion">
+            <h2 class="titulo2">Ejercicio #2</h2>
+            <h4 class="titulo4"><span class="tema">Conversion de divisas</span>, "Pesos Colombianos" - "Dólar Estadounidense"</h4>
 
-    <h2 class="titulo2">Ejercicio #1</h2>
-    <h4 class="titulo4">Introduce los datos solicitados para calcular tu <span class="tema">Indice de masa corporal (IMC).</span></h4>
+            <div class="caja">
+                <div class="int_box">
+                    <label class="pesoColomb cuadro">
+                        <input type="number" id="pesoColomb" placeholder="Ingrese monto en pesos colombiano" class="inpColor">
+                        <span class="negrita blanco">Peso Colombiano</span>
+                    </label>
+                </div>
+                <div class="int_box">
+                    <label class="dolar cuadro">
+                        <input type="number" id="dolar" placeholder="Ingrese monto en dólares" class="inpColor">
+                        <span class="negrita blanco">Dólar Estadounidense</span>
+                    </label>
+                </div>
+            </div>
+        </div>
 
-    <form id="form">
-        <label>
-            <span class="estatura">Estatura (cm)</span><br>en centimetros:
-            <input type="number" name="estatura" required>
-        </label>
-        <label>
-            <span class="peso">Peso (kg)</span><br>en kilogramos:
-            <input type="number" name="peso" required>
-        </label>
-        <button type="submit">Calcular</button>
-    </form>
 
-    <label>
-        Resultado
-        <input type="text" id="resultado" readonly>
-    </label>
 
 
 
@@ -45,57 +68,13 @@
 
 
 
+        <div class="ej div_2">
+            <h2 class="titulo2">Ejercicio #3</h2>
+            <h4 class="titulo4">Introduce los datos solicitados para calcular tu <span class="tema">Indice de masa
+                    corporal</span></h4>
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h2 class="titulo2">Ejercicio #2</h2>
-    <h4 class="titulo4"><span class="tema">conversion de divisas</span>, "Pesos Colombianos" a "Dolares"</h4>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h2 class="titulo2">Ejercicio #3</h2>
-    <h4 class="titulo4">Introduce los datos solicitados para calcular tu <span class="tema">Indice de masa
-            corporal</span></h4>
-
-
-
-
-
-
-
-
+    </div>
 
     <script src="main.js"></script>
 </body>
