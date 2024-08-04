@@ -20,7 +20,6 @@ formulario.addEventListener('submit', (e) => {
 })
 
 
-
 const tasaCambio = 4052.01 //tasa de cambio
 const inputPesoCol = document.getElementById('pesoColomb')
 const inputDolar = document.getElementById('dolar')
@@ -51,6 +50,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 inputPesoCol.addEventListener('input', actDolarEstadounidense)
 inputDolar.addEventListener('input', actPesoColombiano)
+
+
+
 
 
 

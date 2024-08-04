@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'roboto', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 0;
+    background: url(../img/textura-papel-azul-claro-foto-alta-resolucion_463999-904.jpg) no-repeat center center/ cover;
+}
+
+.nuevaNota {
+    display: flex;
+    gap: 20px;
+
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: end;
+    margin-bottom: 25px;
+}
+
+.contenedor {
+    width: 90%;
+    min-height: 500px;
+    background-color: white;
+    padding: 40px;
+    border: 5px solid black;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items:start;
+    background-color: rgb(174, 235, 243);
+}
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    height: 20px;
+    font-size:16px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 4px solid #404040;
+    border-radius: 10px;
+}
+
+textarea{
+    width: 100%;
+    height: 150px;
+    font-size: 14px;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    border: 4px solid #404040;
+    border-radius: 10px;
+ 
+}
+
+.boton {
+    width: 150px;
+    height: 60px;
+    padding: 10px;
+    color: white;
+    font-size: 22px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+}
+
+.boton1 {
+    background-color: green;
+
+}
+
+.boton2 {
+    background-color: red;
+}
+
+
+#lista-de-tareas {
+    width: 80%;
+    margin-top: 20px;
+}
+
+.tarea {
+    width: 100%;
+    min-height: 70px;
+    font-size: 25px;
+    padding: 10px;
+    margin-top: 10px;
+    color: white;
+    background-color: #407ba6;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+/* Tarea Completada */
+.tarea.completada {
+    text-decoration: line-through;
+    background-color: black;
+    border: none;
+}
+
+.tarea p {
+    max-width: 350px;
+}
+
+i {
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.icono-completar {
+    color: rgb(0, 255, 0);
+}
+
+.icono-eliminar {
+    color: white;
+}
+
+.icono-completar:hover,
+.icono-eliminar:hover {
+    background-color: rgba(255, 255, 255, 0.523);
+}
