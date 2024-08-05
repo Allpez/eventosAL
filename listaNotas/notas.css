@@ -40,6 +40,7 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     align-items:start;
+    justify-content: center;
     background-color: rgb(170, 245, 255);
 }
 h1 {
@@ -90,13 +91,15 @@ textarea{
 }
 
 
-#lista-de-tareas {
+#lista-de-notas {
     width: 80%;
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .nota {
-    width: 100%;
+    width: 200px;
     min-height: 70px;
     font-size: 25px;
     padding: 10px;

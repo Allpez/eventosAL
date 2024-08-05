@@ -4,36 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./conversion.css">
     <title>Eventos</title>
 </head>
 
 <body>
     <div class="layout">
         <h1 class="titulo">Taller de Eventos</h1>
-
-        <div class="ej">
-            <h2 class="titulo2">Ejercicio #1</h2>
-            <h4 class="titulo4">Introduce los datos solicitados para calcular tu <span class="tema">Indice de masa corporal (IMC).</span></h4>
-            <form id="form" class="form">
-                <label class="estatura">
-                    <span class="negrita">Estatura (cm)</span>
-                    <p class="parrafo">en centimetros:</p>
-                    <input type="number" name="estatura" required>
-                </label>
-                <label class="peso">
-                    <span class="negrita">Peso (kg)</span>
-                    <p class="parrafo">en kilogramos:</p>
-                    <input type="number" name="peso" required>
-                </label>
-                <button type="submit" class="boton">Calcular</button>
-            </form>
-            <label class="resultado">
-                Resultado
-                <input type="text" id="resultado" readonly>
-            </label>
-        </div>
-
         <div class="ej div_2 conversion">
             <h2 class="titulo2">Ejercicio #2</h2>
             <h4 class="titulo4"><span class="tema">Conversion de divisas</span>, "Pesos Colombianos" - "Dólar Estadounidense"</h4>
@@ -53,9 +30,8 @@
                 </div>
             </div>
         </div>
-        <a href="./pages/notas.html"><button class="boton2">Ejercicio #3</button></a>
     </div>
-    <script src="./scripts/main.js"></script>
+    <script src="./conversion.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,5 @@
+let array = [] //Crear un array donde vamos a guardar las notas
+
 const inputTitulo = document.getElementById('ingresar-tarea')
 const inputDescripcion = document.getElementById('descripcion-tarea')
 const botonCrear = document.getElementById('crear')
@@ -15,15 +17,27 @@ function agregarNota(){
         notaNueva.innerHTML = `
             <div class="card">
                 <div class="card-header">
-                    <input type="checkbox">
+                    <input type="checkbox" class="checkbox-completar">
                     <h5 class="card-title">${inputTitulo.value}</h5>
                 </div>
                 <div class="card-body">
                     <p class="card-text">${inputDescripcion.value}</p>
-                    <a href="#" class="btn btn-primary">Borrar nota</a>
+                    <button type="submit" class="btn btn-primary">Borrar nota</button>
                 </div>
             </div>                    
-            `
+        `
+        // <div class="card">
+        // <div class="card-header">
+        //     <input type="checkbox" class="checkbox-completar">
+        //     <h5 class="card-title">Mantenimiento Moto</h5>
+        // </div>
+        // <div class="card-body">
+        //     <p class="card-text">Cambio de aceite</p>
+        //     <button type="submit" class="btn btn-primary">Borrar nota</button>
+        // </div>
+        // </div>
+
+
         listaDeNotas.appendChild(notaNueva) //Agregar la nueva nota al contenedor.
         inputTitulo.value = '';
         inputDescripcion.value = ''
@@ -33,12 +47,18 @@ function agregarNota(){
             e.preventDefault(); // Evitar el comportamiento por defecto del enlace
             listaDeNotas.removeChild(notaNueva);
         })
+        const checkboxCompletar = notaNueva.querySelector('.checkbox-completar')
+        checkboxCompletar.addEventListener('change', completarNota)
     }else{         
         alert('Por favor ingresa una tarea.')
     }
 }
 
 
+function completarNota(e) {
+    let nota = e.target.closest('.nota')
+    nota.classList.toggle('completada')
+}
 
 botonCrear.addEventListener('click', agregarNota)
 inputTitulo.addEventListener('keydown', (e) => {
