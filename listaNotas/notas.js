@@ -1,135 +1,132 @@
-let array = [] //Crear un array donde vamos a guardar las notas
+let notas = [
+    { id: 1, titulo: "Mantenimiento moto", texto: "Cambio aceite", realizada: false},
+    { id: 2, titulo: "Limpieza casa", texto: "Sacar basura, limpiar cocina", realizada: true },
+    { id: 3, titulo: "Programacion - Sprint2", texto: "ajustar detalles de diseño", realizada: false},
+    { id: 4, titulo: "Freya", texto: "Paseo en el parque", realizada: true}
+];
 
-const inputTitulo = document.getElementById('ingresar-tarea')
-const inputDescripcion = document.getElementById('descripcion-tarea')
-const botonCrear = document.getElementById('crear')
-const botonBorrar = document.getElementById('borrar')
-const listaDeNotas = document.getElementById('lista-de-notas')
+let idGlobal = 2;
 
+function crearInterfaz() {
+    const app = document.getElementById('container');
+    app.innerHTML = `
+        <div class="container mt-5">
+            <h1 class="mb-4">Aplicación de Notas</h1>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <input type="text" id="titulo" class="form-control mb-2" placeholder="Título">
+                    <textarea id="texto" class="form-control mb-2" placeholder="Texto de la nota"></textarea>
+                    <button onclick="guardarNota()" class="btn btn-primary me-2">Guardar</button>
+                    <button onclick="limpiarCampos()" class="btn btn-secondary">Limpiar</button>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="filtro-texto" class="form-control mb-2" placeholder="Buscar notas" oninput="aplicarFiltros()">
+                    <div class="form-check form-switch">
+                        <input type="checkbox" id="filtro-realizadas" class="form-check-input" role="switch" onchange="aplicarFiltros()">
+                        <label class="form-check-label" for="filtro-realizadas">Mostrar solo realizadas</label>
+                    </div>
+                </div>
+            </div>
+            <div id="contenedor-notas" class="row"></div>
+        </div>
+    `;
+}
 
+function pintarNotas(notasFiltradas = notas) {
+    const contenedor = document.getElementById("contenedor-notas");
+    contenedor.innerHTML = "";
 
+    if (notasFiltradas.length === 0) {
+        contenedor.innerHTML = '<div class="col-12"><p class="alert alert-info">NO HAY NOTAS PARA MOSTRAR</p></div>';
+        return;
+    }
 
-function agregarNota(){
-    if (inputTitulo.value){
-        //Crear nota
-        let notaNueva = document.createElement('div')
-        notaNueva.classList.add('nota')
-        notaNueva.innerHTML = `
+    notasFiltradas.forEach(nota => {
+        const notaElement = document.createElement('div');
+        notaElement.className = 'col-md-4 mb-3';
+        notaElement.innerHTML = `
             <div class="card">
-                <div class="card-header">
-                    <input type="checkbox" class="checkbox-completar">
-                    <h5 class="card-title">${inputTitulo.value}</h5>
-                </div>
                 <div class="card-body">
-                    <p class="card-text">${inputDescripcion.value}</p>
-                    <button type="submit" class="btn btn-primary">Borrar nota</button>
+                    <h5 class="card-title">${nota.titulo}</h5>
+                    <p class="card-text">${nota.texto}</p>
+                    <div class="form-check form-switch mb-2">
+                        <input type="checkbox" class="form-check-input" role="switch" ${nota.realizada ? 'checked' : ''} onchange="marcarRealizada(${nota.id})">
+                        <label class="form-check-label">Realizada</label>
+                    </div>
+                    <button onclick="borrarNota(${nota.id})" class="btn btn-danger btn-sm">Borrar nota</button>
                 </div>
-            </div>                    
-        `
-        // <div class="card">
-        // <div class="card-header">
-        //     <input type="checkbox" class="checkbox-completar">
-        //     <h5 class="card-title">Mantenimiento Moto</h5>
-        // </div>
-        // <div class="card-body">
-        //     <p class="card-text">Cambio de aceite</p>
-        //     <button type="submit" class="btn btn-primary">Borrar nota</button>
-        // </div>
-        // </div>
+            </div>
+        `;
+        contenedor.appendChild(notaElement);
+    });
+}
 
+function agregarNota(titulo, texto) {
+    idGlobal++;
+    const nuevaNota = { id: idGlobal, titulo, texto, realizada: false };
+    notas.push(nuevaNota);
+}
 
-        listaDeNotas.appendChild(notaNueva) //Agregar la nueva nota al contenedor.
-        inputTitulo.value = '';
-        inputDescripcion.value = ''
-            
-        const botonBorrar = notaNueva.querySelector('.btn-primary')
-        botonBorrar.addEventListener('click', (e) => {
-            e.preventDefault(); // Evitar el comportamiento por defecto del enlace
-            listaDeNotas.removeChild(notaNueva);
-        })
-        const checkboxCompletar = notaNueva.querySelector('.checkbox-completar')
-        checkboxCompletar.addEventListener('change', completarNota)
-    }else{         
-        alert('Por favor ingresa una tarea.')
+function guardarNota() {
+    const titulo = document.getElementById("titulo").value;
+    const texto = document.getElementById("texto").value;
+    
+    if (titulo.trim() !== "" && texto.trim() !== "") {
+        agregarNota(titulo, texto);
+        aplicarFiltros();
+        limpiarCampos();
+    } else {
+        alert("Por favor, completa todos los campos");
     }
 }
 
-
-function completarNota(e) {
-    let nota = e.target.closest('.nota')
-    nota.classList.toggle('completada')
+function borrarNota(id) {
+    notas = notas.filter(nota => nota.id !== id);
+    aplicarFiltros();
 }
 
-botonCrear.addEventListener('click', agregarNota)
-inputTitulo.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter'){
-        agregarNota()
+function limpiarCampos() {
+    document.getElementById("titulo").value = "";
+    document.getElementById("texto").value = "";
+}
+
+function marcarRealizada(id) {
+    const nota = notas.find(nota => nota.id === id);
+    if (nota) {
+        nota.realizada = !nota.realizada;
+        aplicarFiltros();
     }
-})
+}
 
+function filtrarPorRealizada(array) {
+    return array.filter(nota => nota.realizada);
+}
 
+function filtrarPorTexto(array, texto) {
+    if (!texto) return array;
+    return array.filter(nota => 
+        nota.titulo.toLowerCase().includes(texto.toLowerCase()) || 
+        nota.texto.toLowerCase().includes(texto.toLowerCase())
+    );
+}
 
+function aplicarFiltros() {
+    const textoFiltro = document.getElementById("filtro-texto").value;
+    const soloRealizadas = document.getElementById("filtro-realizadas").checked;
 
+    let notasFiltradas = [...notas];
 
+    if (soloRealizadas) {
+        notasFiltradas = filtrarPorRealizada(notasFiltradas);
+    }
 
-//         //Texto ingresado por el usuario
-//         let textoTitulo = document.createElement('p')
-//         texto.innerText = input.value
-//         tareaNueva.appendChild(texto)
+    notasFiltradas = filtrarPorTexto(notasFiltradas, textoFiltro);
 
-//         //Crear y agregar contenedor de iconos
-//         let iconos = document.createElement('div')
-//         iconos.classList.add('iconos')
-//         tareaNueva.appendChild(iconos)
+    pintarNotas(notasFiltradas);
+}
 
-//         //Iconos
-//         let completar = document.createElement('i')
-//         completar.classList.add('bi', 'bi-check-circle-fill', 'icono-completar')
-//         completar.addEventListener('click', completarTarea)
+document.addEventListener("DOMContentLoaded", () => {
+    crearInterfaz();
+    aplicarFiltros();
+});
 
-//         let eliminar = document.createElement('i')
-//         eliminar.classList.add('bi', 'bi-trash3-fill', 'icono-eliminar')
-//         eliminar.addEventListener('click', eliminarTarea)
-
-//         iconos.append(completar, eliminar)
-
-//         // Agregar tarea a la lista
-//         listaDeTarea.appendChild(tareaNueva)
-//     }else{
-//         alert('Por favor ingresa una tarea.')
-//     }
-// }
-
-// function completarTarea(e) {
-//     let tarea = e.target.parentNode.parentNode
-//     tarea.classList.toggle('completada')
-// }
-
-// function eliminarTarea(e) {
-//     let tarea = e.target.parentNode.parentNode
-//     tarea.remove()    
-// }
-
-
-
-
-
-
-// let notas = [
-//     { 
-//         id: 1,
-//         titulo: 'Sacar la basura',
-//         texto: 'mi mama me va a retar si no lo hago',
-//         realizada: false
-//     },
-//     {
-//         id: 2,
-//         titulo: 'odontologo',
-//         texto: 'cita odontólogo, 10/agosto/2024',
-//         realizada: false
-//     }
-// ]
-
-// let idGlobal = notas[1].id
-
-// console.log(idGlobal);
