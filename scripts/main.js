@@ -1,3 +1,4 @@
+// Ejercicio #1
 const formulario = document.forms[0]
 
 formulario.addEventListener('submit', (e) => {
@@ -19,7 +20,7 @@ formulario.addEventListener('submit', (e) => {
 
 })
 
-
+// Ejercicio #2
 const tasaCambio = 4052.01 //tasa de cambio
 const inputPesoCol = document.getElementById('pesoColomb')
 const inputDolar = document.getElementById('dolar')
