@@ -8,6 +8,7 @@
 body {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -15,25 +16,49 @@ body {
     background: url(../img/textura-papel-azul-claro-foto-alta-resolucion_463999-904.jpg) no-repeat center center/ cover;
 }
 
+.nombre {
+    background-color: rgb(63, 93, 228);
+    border-radius: 10px;
+    border: 2px solid rgb(70, 95, 207);
+}
+
+.cuadro{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    max-width: 90%;
+    border: 2px solid rgb(46, 46, 143);
+    padding: 10px;
+    align-items: center;
+    background-color: rgb(191, 228, 243);
+}
+
+.titulo {
+    width: 40%;
+    background-color: rgb(243, 233, 96);
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid rgb(64, 91, 212);
+}
+
 .nuevaNota {
     display: flex;
     gap: 20px;
-
 }
 
-.botones {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    justify-content: end;
-    margin-bottom: 25px;
+.btn {
+    margin: 10px;
+}
+
+.text {
+    height: 30px;
 }
 
 .contenedor {
     width: 90%;
     min-height: 500px;
     background-color: white;
-    padding: 40px;
     border: 5px solid black;
     border-radius: 20px;
     display: flex;
@@ -69,76 +94,5 @@ textarea{
  
 }
 
-.boton {
-    width: 150px;
-    height: 60px;
-    padding: 10px;
-    color: white;
-    font-size: 22px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    user-select: none;
-}
-
-.boton1 {
-    background-color: green;
-
-}
-
-.boton2 {
-    background-color: red;
-}
 
 
-#lista-de-notas {
-    width: 80%;
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.nota {
-    width: 200px;
-    min-height: 70px;
-    font-size: 25px;
-    padding: 10px;
-    margin-top: 10px;
-    color: white;
-    background-color: #407ba6;
-    border: 2px solid black;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: center;
-}
-
-.nota.completada {
-    text-decoration: line-through;
-    background-color: black;
-    border: none;
-}
-
-.nota p {
-    max-width: 350px;
-}
-
-i {
-    margin: 5px;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.icono-completar {
-    color: rgb(0, 255, 0);
-}
-
-.icono-eliminar {
-    color: white;
-}
-
-.icono-completar:hover,
-.icono-eliminar:hover {
-    background-color: rgba(255, 255, 255, 0.523);
-}

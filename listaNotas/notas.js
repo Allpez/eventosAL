@@ -1,28 +1,31 @@
+//Crear un array donde vamos a guardar las notas.
+//Agregar un par de notas de prueba.
 let notas = [
-    { id: 1, titulo: "Mantenimiento moto", texto: "Cambio aceite", realizada: false},
-    { id: 2, titulo: "Limpieza casa", texto: "Sacar basura, limpiar cocina", realizada: true },
-    { id: 3, titulo: "Programacion - Sprint2", texto: "ajustar detalles de diseño", realizada: false},
+    { id: 1, titulo: "Mantenimiento moto", texto: "Cambio de aceite y pastillas de freno", realizada: false},
+    { id: 2, titulo: "Limpieza casa", texto: "Sacar basura, limpiar cocina", realizada: true},
+    { id: 3, titulo: "Programacion", texto: "Sprint #3 - Ajustar detalles de diseño", realizada: false},
     { id: 4, titulo: "Freya", texto: "Paseo en el parque", realizada: true}
 ];
 
-let idGlobal = 2;
+//Crear una variable idGlobal e inicializala en el mismo valor del ultimo id que creaste manualmente, usaremos esto como control de las notas.
+let idGlobal = 4;
 
 function crearInterfaz() {
     const app = document.getElementById('container');
     app.innerHTML = `
         <div class="container mt-5">
-            <h1 class="mb-4">Aplicación de Notas</h1>
+            <h1 class="mb-4 text-center nombre text-light">Aplicación de Notas</h1>
             <div class="row mb-3">
-                <div class="col-md-6">
-                    <input type="text" id="titulo" class="form-control mb-2" placeholder="Título">
-                    <textarea id="texto" class="form-control mb-2" placeholder="Texto de la nota"></textarea>
+                <div class="col-md-12">
+                    <input type="text" id="titulo" class="form-control mb-2 border border-primary text" placeholder="Título">
+                    <textarea id="texto" class="form-control mb-2 border border-primary" placeholder="Texto de la nota"></textarea>
                     <button onclick="guardarNota()" class="btn btn-primary me-2">Guardar</button>
                     <button onclick="limpiarCampos()" class="btn btn-secondary">Limpiar</button>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" id="filtro-texto" class="form-control mb-2" placeholder="Buscar notas" oninput="aplicarFiltros()">
+                    <input type="text" id="filtro-texto" class="form-control mb-2 border border-primary text" placeholder="Buscar notas" oninput="aplicarFiltros()">
                     <div class="form-check form-switch">
-                        <input type="checkbox" id="filtro-realizadas" class="form-check-input" role="switch" onchange="aplicarFiltros()">
+                        <input type="checkbox" id="filtro-realizadas" class="form-check-input border border-primary" role="switch" onchange="aplicarFiltros()">
                         <label class="form-check-label" for="filtro-realizadas">Mostrar solo realizadas</label>
                     </div>
                 </div>
@@ -32,7 +35,7 @@ function crearInterfaz() {
     `;
 }
 
-function pintarNotas(notasFiltradas = notas) {
+function pintarNotas(notasFiltradas = notas) { //Crear una función que pinte las notas en forma de tarjetas dentro del div contenedor.
     const contenedor = document.getElementById("contenedor-notas");
     contenedor.innerHTML = "";
 
@@ -44,16 +47,17 @@ function pintarNotas(notasFiltradas = notas) {
     notasFiltradas.forEach(nota => {
         const notaElement = document.createElement('div');
         notaElement.className = 'col-md-4 mb-3';
+        //Crear un div que va a ser el contenedor de las notas.
         notaElement.innerHTML = `
             <div class="card">
-                <div class="card-body">
+                <div class="card-body border border-primary rounded-2">
                     <h5 class="card-title">${nota.titulo}</h5>
-                    <p class="card-text">${nota.texto}</p>
-                    <div class="form-check form-switch mb-2">
-                        <input type="checkbox" class="form-check-input" role="switch" ${nota.realizada ? 'checked' : ''} onchange="marcarRealizada(${nota.id})">
-                        <label class="form-check-label">Realizada</label>
+                    <p class="card-text ${nota.realizada ? 'text-decoration-line-through' : ''}">${nota.texto}</p>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input me-2 border border-primary" type="checkbox" id="checkbox-${nota.id}" ${nota.realizada ? 'checked' : ''} onchange="marcarRealizada(${nota.id})">
+                        <label class="form-check-label" for="checkbox-${nota.id}">Realizada</label>
                     </div>
-                    <button onclick="borrarNota(${nota.id})" class="btn btn-danger btn-sm">Borrar nota</button>
+                    <button onclick="borrarNota(${nota.id})" class="btn btn-danger btn-sm border border-primary">Borrar nota</button>
                 </div>
             </div>
         `;
@@ -129,4 +133,3 @@ document.addEventListener("DOMContentLoaded", () => {
     crearInterfaz();
     aplicarFiltros();
 });
-
